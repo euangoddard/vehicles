@@ -4,8 +4,12 @@ speech.factory('Speech', function ($log) {
 
     var is_available = ('speechSynthesis' in window);
 
+    var voices = [];
+    speechSynthesis.onvoiceschanged = function (event) {
+        voices = speechSynthesis.getVoices();
+    };
+
     var get_voice_for_language = function (language) {
-        var voices = window.speechSynthesis.getVoices();
         var preferred_voice = null;
         angular.forEach(voices, function (voice) {
             if (language === voice.lang) {
@@ -25,6 +29,8 @@ speech.factory('Speech', function ($log) {
             var voice = get_voice_for_language(language);
             if (voice) {
                 utterance.voice = voice;
+            } else {
+                utterance.lang = language;
             }
             window.speechSynthesis.speak(utterance);
         }
