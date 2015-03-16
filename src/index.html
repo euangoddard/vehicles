@@ -12,7 +12,10 @@
 </head>
 <body ng-app="vehicles">
   <h1>Hello</h1>
-  <span ng-controller="test">{{ test }}</span>
+  <div ng-controller="test">
+    <input type="text" required ng-model="speech.text">
+    <button type="button" ng-click="speak()">Speak</button>
+  </div>
 
   <!-- inject:js -->
   <!-- endinject -->
