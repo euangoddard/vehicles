@@ -7,14 +7,20 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
+  <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
   <!-- inject:css -->
   <!-- endinject -->
 </head>
 <body ng-app="vehicles">
   <h1>Hello</h1>
-  <div ng-controller="test">
-    <input type="text" required ng-model="speech.text">
-    <button type="button" ng-click="speak()" ng-disabled="is_speaking">Speak</button>
+  <div ng-controller="test" id="name-capture" class="container">
+    <form>
+      <h1>Get started</h1>
+      <input type="text" required ng-model="speech.text" placeholder="what's your name">
+      <div>
+        <button type="button" ng-click="speak()" ng-disabled="is_speaking">Play</button>
+      </div>
+    </form>
   </div>
 
   <!-- inject:js -->

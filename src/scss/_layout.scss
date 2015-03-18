@@ -1,0 +1,14 @@
+@import "utils";
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+@include media-orientation-query(portrait) {
+    .container {
+        flex-direction: column;
+    }
+}
