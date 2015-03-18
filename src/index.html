@@ -11,14 +11,24 @@
   <!-- inject:css -->
   <!-- endinject -->
 </head>
-<body ng-app="vehicles">
-  <h1>Hello</h1>
-  <div ng-controller="test" id="name-capture" class="container">
-    <form>
-      <h1>Get started</h1>
-      <input type="text" required ng-model="speech.text" placeholder="what's your name">
+<body ng-app="vehicles" ng-controller="GameController as game_controller">
+  <div ng-controller="NameController as name_controller" id="name-capture" class="container" ng-hide="is_submitted">
+    <form name="capture" ng-submit="name_controller.read_name()">
+      <h1>Let's play</h1>
+      <input
+        type="text"
+        required
+        ng-model="name"
+        placeholder="what's your name"
+        ng-disabled="is_submitted"
+      >
       <div>
-        <button type="button" ng-click="speak()" ng-disabled="is_speaking">Play</button>
+        <button
+          type="submit"
+          ng-disabled="capture.$invalid || is_submitted"
+        >
+            Play
+          </button>
       </div>
     </form>
   </div>

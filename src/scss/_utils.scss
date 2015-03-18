@@ -12,3 +12,9 @@
         @content;
     }
 }
+
+@mixin media-min-width-query($device-width) {
+    @media screen and (min-width: $device-width) {
+        @content;
+    }
+}

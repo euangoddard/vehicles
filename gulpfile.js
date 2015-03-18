@@ -48,7 +48,12 @@ gulp.task('sass', function () {
 
 gulp.task('build-html', ['build-js', 'copy-js-libs', 'sass'], function () {
   var target = gulp.src('./src/index.html');
-  var sources = gulp.src(['./dist/js/lib/**/*.js', './dist/js/**/*.js', './dist/css/**/*.css'], {read: false});
+  var sources = gulp.src([
+    './dist/js/lib/angular.min.js',
+    './dist/js/lib/**/*.js',
+    './dist/js/**/*.js',
+    './dist/css/**/*.css'
+  ], {read: false});
 
   return target.pipe(inject(sources, {ignorePath: '/dist/', addRootSlash: false}))
     .pipe(gulp.dest('./dist'));

@@ -31,6 +31,10 @@ $dividerColor: #B6B6B6;
     color: #fff;
     font-size: 2rem;
 
+    form {
+    	width: 80%;
+    }
+
     h1 {
         font-weight: normal;
         text-align: center;
@@ -53,13 +57,17 @@ $dividerColor: #B6B6B6;
             margin-bottom: 0;
         }
 
+        &:disabled {
+        	color: rgba($lightPrimaryColor, 0.5);
+        }
+
         &::-webkit-input-placeholder {
-            color: $accentColor;
-        } 
+            color: $lightPrimaryColor;
+        }
     }
 
     div {
-         display: flex;
+        display: flex;
         justify-content: flex-end;
 
         button {
@@ -68,9 +76,37 @@ $dividerColor: #B6B6B6;
             text-transform: uppercase;
             border: none;
             font-size: 15px;
-            padding: 0px 24px;
+            padding: 0px 1rem;
             color: $secondaryTextColor;
             margin: 0.5rem 0;
+            outline: none;
+
+            &:disabled {
+            	color: rgba($secondaryTextColor, 0.5);
+            }
         }
+
     }
+
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+
+    &.ng-enter, &.ng-leave {
+	  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+	}
+
+	&.ng-enter,
+	&.ng-leave.ng-leave-active {
+	  opacity:0;
+	}
+
+	&.ng-leave,
+	&.ng-enter.ng-enter-active {
+	  opacity:1;
+	}
+}
+
+@include media-min-width-query(769px) {
+	#name-capture form {
+		width: 50%;
+	}
 }
