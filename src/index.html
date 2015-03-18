@@ -14,7 +14,7 @@
   <h1>Hello</h1>
   <div ng-controller="test">
     <input type="text" required ng-model="speech.text">
-    <button type="button" ng-click="speak()">Speak</button>
+    <button type="button" ng-click="speak()" ng-disabled="is_speaking">Speak</button>
   </div>
 
   <!-- inject:js -->
