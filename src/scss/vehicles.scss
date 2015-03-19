@@ -88,20 +88,18 @@ $dividerColor: #B6B6B6;
 
     }
 
-    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-
     &.ng-enter, &.ng-leave {
-	  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+	  transition: transform linear 0.3s;
 	}
 
 	&.ng-enter,
 	&.ng-leave.ng-leave-active {
-	  opacity:0;
+	  transform: translateY(100vh);
 	}
 
 	&.ng-leave,
 	&.ng-enter.ng-enter-active {
-	  opacity:1;
+	  transform: translateY(0);
 	}
 }
 
