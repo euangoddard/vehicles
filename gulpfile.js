@@ -1,4 +1,7 @@
+var fs = require('fs');
+var glob = require('glob').sync;
 var gulp = require('gulp');
+var path = require('path');
 
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
@@ -24,8 +27,14 @@ gulp.task('copy-js-libs', function () {
 });
 
 
-gulp.task('build-js', function () {
-    return gulp.src('./src/js/**/*.js')
+gulp.task('copy-images', function () {
+  return gulp.src('./img/**/*.svg')
+    .pipe(gulp.dest('./dist/img'));
+});
+
+
+gulp.task('build-js', ['constants'], function () {
+    return gulp.src(['./tmp/constants.js', './src/js/**/*.js'])
         .pipe(insert.prepend(CONFIG.intro))
         .pipe(insert.append(CONFIG.outro))
         .pipe(ngAnnotate())
@@ -35,15 +44,42 @@ gulp.task('build-js', function () {
 });
 
 
-gulp.task('sass', function () {
+gulp.task('sass', ['constants'], function () {
   return gulp.src('./src/scss/**/*.scss')
     //.pipe(sass({outputStyle: 'compressed'}))
-    .pipe(sass({outputStyle: 'expanded'}))
+    .pipe(sass({
+      outputStyle: 'expanded',
+      includePaths: [get_tmp_dir()]
+    }))
     .pipe(autoprefixer({browsers: [
     	'last 2 versions'
     ]}))
     .pipe(gulp.dest('./dist/css'));
 });
+
+
+gulp.task('constants', function (done) {
+  var image_path = glob('./img/**/*.svg');
+  var image_names = image_path.map(function (image_path) {
+    return path.basename(image_path, '.svg');
+  });
+  var tmp_dir = get_tmp_dir();
+  try {
+    fs.mkdirSync(tmp_dir);
+  }
+  catch (e) {}
+
+  var sass = '$image-names: ' + image_names.join(', ') + ';';
+  fs.writeFileSync(path.join(tmp_dir, '_constants.scss'), sass);
+
+  var js = 'angular.module("vehicles.constants", []).constant("VEHICLES", ' + JSON.stringify(image_names) + ');';
+  fs.writeFileSync(path.join(tmp_dir, 'constants.js'), js);
+  done();
+});
+
+var get_tmp_dir = function () {
+  return path.join(__dirname, 'tmp');
+};
 
 
 gulp.task('build-html', ['build-js', 'copy-js-libs', 'sass'], function () {
@@ -70,7 +106,7 @@ gulp.task('serve', function () {
 });
 
 
-gulp.task('build', ['build-html']);
+gulp.task('build', ['build-html', 'copy-images']);
 
 
 gulp.task('watch', ['build'], function () {

@@ -1,10 +1,15 @@
-var vehicles = angular.module('vehicles', ['ngAnimate', 'speech']);
+var vehicles = angular.module(
+    'vehicles',
+    ['ngAnimate', 'speech', 'vehicles.constants']
+);
 vehicles.run(function (Speech) {
 	Speech.language = 'en-GB';
 });
 
-vehicles.controller('GameController', function ($scope, Speech) {
+vehicles.controller('GameController', function ($scope, Speech, VEHICLES) {
 	this.name = null;
+
+    console.log(VEHICLES);
 
 	this.set_name = function (name) {
 		this.name = name;
