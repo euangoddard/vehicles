@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "glob": "^5.0.3",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-concat": "^2.5.2",
