@@ -3,8 +3,16 @@
 @import "constants";
 
 @each $image-name in $image-names {
+    .vehicle {
+        display: block;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+
+
     .vehicle-#{$image-name} {
-        content: '#{$image-name}';
+        background-image: url("../img/#{$image-name}.svg");
     }
 }
 
@@ -93,7 +101,7 @@ $secondaryTextColor: #727272;
     }
 
     &.ng-enter, &.ng-leave {
-	  transition: transform linear 0.3s;
+	  transition: transform linear 0.8s;
 	}
 
 	&.ng-enter,

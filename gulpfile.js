@@ -15,9 +15,9 @@ var webserver = require('gulp-webserver');
 
 var CONFIG = {
 	intro:
-		'(function (angular) {\n' +
+		'(function (angular, _) {\n' +
 		'    "use strict";\n',
-	outro: '\n}(window.angular));\n'
+	outro: '\n}(window.angular, window.lodash));\n'
 };
 
 
@@ -28,8 +28,14 @@ gulp.task('copy-js-libs', function () {
 
 
 gulp.task('copy-images', function () {
-  return gulp.src('./img/**/*.svg')
+  return gulp.src('./src/img/**/*.svg')
     .pipe(gulp.dest('./dist/img'));
+});
+
+
+gulp.task('copy-partials', function () {
+  return gulp.src('./src/partials/**/*.html')
+    .pipe(gulp.dest('./dist/partials'));
 });
 
 
@@ -59,7 +65,7 @@ gulp.task('sass', ['constants'], function () {
 
 
 gulp.task('constants', function (done) {
-  var image_path = glob('./img/**/*.svg');
+  var image_path = glob('./src/img/**/*.svg');
   var image_names = image_path.map(function (image_path) {
     return path.basename(image_path, '.svg');
   });
@@ -82,7 +88,7 @@ var get_tmp_dir = function () {
 };
 
 
-gulp.task('build-html', ['build-js', 'copy-js-libs', 'sass'], function () {
+gulp.task('build-html', ['build-js', 'copy-js-libs', 'copy-partials', 'sass'], function () {
   var target = gulp.src('./src/index.html');
   var sources = gulp.src([
     './dist/js/lib/angular.min.js',
