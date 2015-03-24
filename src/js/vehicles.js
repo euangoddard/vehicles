@@ -1,6 +1,6 @@
 var vehicles = angular.module(
     'vehicles',
-    ['ngAnimate', 'speech']
+    ['ngAnimate', 'speech', 'vehicles.directives']
 );
 vehicles.run(function (Speech) {
 	Speech.language = 'en-GB';

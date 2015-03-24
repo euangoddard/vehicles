@@ -17,7 +17,7 @@ var CONFIG = {
 	intro:
 		'(function (angular, _) {\n' +
 		'    "use strict";\n',
-	outro: '\n}(window.angular, window.lodash));\n'
+	outro: '\n}(window.angular, window._));\n'
 };
 
 
