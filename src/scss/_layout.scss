@@ -2,21 +2,42 @@
 
 .container, .list {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
 
 .list {
-	flex-direction: column;
+    flex-direction: row;
 }
 
-@include media-orientation-query(portrait) {
-    .container {
-        flex-direction: column;
+.item {
+    box-sizing: border-box;
+    padding: 2rem;
+}
+
+$max-slots: 3;
+
+@for $i from 1 through $max-slots {
+    [rows="#{$i}"] {
+        .list, .item {
+            height: floor(100vh / $i);
+        }
     }
-    .list {
-    	flex-direction: row;
+    [columns="#{$i}"] {
+        .item {
+            width: floor(100vw / $i);
+        }
     }
 }
+
+
+// @include media-orientation-query(portrait) {
+//     .container {
+//         flex-direction: column;
+//     }
+//     .list {
+//      flex-direction: row;
+//     }
+// }
 
