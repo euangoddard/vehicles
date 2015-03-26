@@ -1,3 +1,5 @@
+var THEME_COLOURS = ['red', 'pink', 'indigo', 'purple', 'blue', 'teal', 'green', 'orange', 'brown'];
+
 var directives = angular.module('vehicles.directives', ['vehicles.constants']);
 
 directives.directive('vehicles', function () {
@@ -6,6 +8,8 @@ directives.directive('vehicles', function () {
         templateUrl: '../partials/vehicles.html',
         controller: function ($scope, $attrs, VEHICLES) {
             var controller = this;
+
+            this.theme = _.sample(THEME_COLOURS);
 
             controller.rows = parseInt($attrs.rows, 10);
             controller.columns = parseInt($attrs.columns, 10);
@@ -21,7 +25,6 @@ directives.directive('vehicles', function () {
             vehicles_pool = _.shuffle(vehicles_pool);
 
             controller.vehicles = _.chunk(vehicles_pool, controller.columns);
-            console.log(controller.vehicles);
         },
         controllerAs: 'vehicles_controller'
     }

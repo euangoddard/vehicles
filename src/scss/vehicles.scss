@@ -1,5 +1,6 @@
 @import "constants";
 @import "layout";
+@import "colours";
 @import "utils";
 @import "name-capture";
 
@@ -30,5 +31,4 @@ body {
 	margin: 0;
 	padding: 0;
     font-size: 18px;
-    background-color: red;
 }

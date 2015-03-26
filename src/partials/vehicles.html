@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container theme-{{ ::vehicles_controller.theme }}">
     <div class="list" ng-repeat="list in vehicles_controller.vehicles track by $index">
         <div class="item" ng-repeat="vehicle in list track by $index">
             <div class="vehicle vehicle-{{ ::vehicle }}"></div>

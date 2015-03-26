@@ -1,0 +1,17 @@
+$themes: (
+    "red": "#D32F2F",
+    "pink": "#FF4081",
+    "indigo": "#E040FB",
+    "purple": "#673AB7",
+    "blue": "#448AFF",
+    "teal": "#009688",
+    "green": "#4CAF50",
+    "orange": "#FF9800",
+    "brown": "#5D4037"
+);
+
+@each $theme-name, $theme-colour in $themes {
+    .theme-#{$theme-name} {
+        background-color: #{$theme-colour}; 
+    }
+}
