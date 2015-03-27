@@ -1,18 +1,31 @@
-var THEME_COLOURS = ['red', 'pink', 'indigo', 'purple', 'blue', 'teal', 'green', 'orange', 'brown'];
+var THEME_COLOURS = [
+    'red',
+    'pink',
+    'indigo',
+    'purple',
+    'blue',
+    'light-blue',
+    'teal',
+    'green',
+    'light-green',
+    'orange',
+    'deep-orange',
+    'brown',
+    'grey'
+];
 
 var directives = angular.module('vehicles.directives', ['vehicles.constants']);
 
 directives.directive('vehicles', function () {
     return {
-        scope: {},
         templateUrl: '../partials/vehicles.html',
         controller: function ($scope, $attrs, VEHICLES) {
             var controller = this;
 
             this.theme = _.sample(THEME_COLOURS);
 
-            controller.rows = parseInt($attrs.rows, 10);
-            controller.columns = parseInt($attrs.columns, 10);
+            controller.rows = $scope.$eval($attrs.rows);
+            controller.columns = $scope.$eval($attrs.columns);
 
             controller.selected_vehicle = _.sample(VEHICLES);
             var vehicles_pool = [controller.selected_vehicle];

@@ -12,7 +12,13 @@
   <!-- endinject -->
 </head>
 <body ng-app="vehicles" ng-controller="GameController as game_controller">
-  <vehicles rows="3" columns="3"></vehicles>
+  <vehicles
+    ng-repeat="level in game_controller.levels"
+    rows="level.rows"
+    columns="level.columns"
+    class="columns-{{ level.columns }} rows-{{ level.rows }}"
+  >
+  </vehicles>
   <!--
   <div ng-controller="NameController as name_controller" id="name-capture" class="container" ng-if="!game_controller.name">
     <form name="capture" ng-submit="name_controller.read_name()">

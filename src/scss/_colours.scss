@@ -4,10 +4,14 @@ $themes: (
     "indigo": "#E040FB",
     "purple": "#673AB7",
     "blue": "#448AFF",
+    "light-blue": "#03A9F4",
     "teal": "#009688",
     "green": "#4CAF50",
+    "light-green": "#8BC34A",
     "orange": "#FF9800",
-    "brown": "#5D4037"
+    "deep-orange": "#FF5722",
+    "brown": "#5D4037",
+    "grey": "616161"
 );
 
 @each $theme-name, $theme-colour in $themes {

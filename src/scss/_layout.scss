@@ -7,6 +7,10 @@
     justify-content: space-around;
 }
 
+.container {
+    height: 100vh;
+}
+
 .list {
     flex-direction: row;
 }
@@ -19,12 +23,12 @@
 $max-slots: 3;
 
 @for $i from 1 through $max-slots {
-    [rows="#{$i}"] {
+    .rows-#{$i} {
         .list, .item {
             height: floor(100vh / $i);
         }
     }
-    [columns="#{$i}"] {
+    .columns-#{$i} {
         .item {
             width: floor(100vw / $i);
         }
