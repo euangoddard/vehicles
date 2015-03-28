@@ -5,6 +5,7 @@ var path = require('path');
 
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
+var gulpif = require('gulp-if');
 var inject = require('gulp-inject');
 var insert = require('gulp-insert');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -17,7 +18,8 @@ var CONFIG = {
 	intro:
 		'(function (angular, _) {\n' +
 		'    "use strict";\n',
-	outro: '\n}(window.angular, window._));\n'
+	outro: '\n}(window.angular, window._));\n',
+  is_release: false
 };
 
 
@@ -45,17 +47,19 @@ gulp.task('build-js', ['constants'], function () {
         .pipe(insert.append(CONFIG.outro))
         .pipe(ngAnnotate())
         .pipe(concat('app.js'))
-        //.pipe(uglify())
+        .pipe(gulpif(CONFIG.is_release, uglify()))
         .pipe(gulp.dest('./dist/js'));
 });
 
 
 gulp.task('sass', ['constants'], function () {
+  var output_style = CONFIG.is_release ? 'compressed' : 'expanded';
+
   return gulp.src('./src/scss/**/*.scss')
-    //.pipe(sass({outputStyle: 'compressed'}))
     .pipe(sass({
-      outputStyle: 'expanded',
-      includePaths: [get_tmp_dir()]
+      outputStyle: output_style,
+      includePaths: [get_tmp_dir()],
+      imagePath: '../img'
     }))
     .pipe(autoprefixer({browsers: [
     	'last 2 versions'
