@@ -1,3 +1,4 @@
+@import "animations";
 @import "constants";
 @import "layout";
 @import "colours";
@@ -5,7 +6,26 @@
 @import "name-capture";
 
 
-$vehicle-size: 60%;
+.slide-in-out {
+    @include full-screen;
+    display: block;
+
+    &.ng-enter, &.ng-leave {
+        transition: transform linear 0.8s;
+    }
+
+    &.ng-enter {
+        transform: translateX(-100vw);
+    }
+    &.ng-leave.ng-leave-active {
+        transform: translateX(100vw);
+    }
+
+    &.ng-leave,
+    &.ng-enter.ng-enter-active {
+        transform: translateX(0);
+    }
+}
 
 .vehicle {
     display: block;
@@ -14,12 +34,16 @@ $vehicle-size: 60%;
     background-position: center center;
     width: 100%;
     height: 100%;
+
+    &:hover {
+        animation: wobble 0.7s ease;
+    }
 }
 
 @each $image-name in $image-names {
 
     .vehicle-#{$image-name} {
-        background-image: url("../img/#{$image-name}.svg");
+        background-image: image-url("#{$image-name}.svg");
     }
 }
 

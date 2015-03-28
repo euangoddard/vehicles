@@ -1,0 +1,11 @@
+@keyframes wobble {
+    0%, 100% {
+        transform: rotateZ(0);
+    }
+    25% {
+        transform: rotateZ(5deg);
+    }
+    75% {
+        transform: rotateZ(-5deg);
+    }
+}
