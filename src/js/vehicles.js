@@ -7,34 +7,28 @@ vehicles.run(function (Speech) {
 });
 
 vehicles.controller('GameController', function ($scope, Speech, $interval) {
-    this.name = null;
+    var controller = this;
+    Speech.say('Welcome to vehicle hunt');
 
-    this.set_name = function (name) {
-        this.name = name;
-        Speech.say('Hello ' + name + '. Let\'s play!');
+    controller.name = null;
+
+    controller.set_name = function (name) {
+        controller.name = name;
+        Speech.say('Hello ' + name + '. Let\'s play!').then(function () {
+            controller.advance_level();
+        });
     };
 
     var levels = get_levels();
-    this.levels = [];
-    this.advance_level = function () {
-        this.levels.shift();
-        this.levels.push(levels.shift());
-    };
-    this.advance_level();
-    var c = this;
-    $interval(function () {
-        c.advance_level();
-    }, 3000);
-});
-
-
-vehicles.controller('NameController', function ($scope) {
-    $scope.name = null;
-    $scope.is_submitted = false;
-
-    this.read_name = function () {
-        $scope.game_controller.set_name($scope.name);
-        $scope.is_submitted = true;
+    controller.levels = [];
+    controller.advance_level = function () {
+        controller.levels.shift();
+        var next_level = levels.shift();
+        if (next_level) {
+            controller.levels.push(next_level);
+        } else {
+            alert('done');
+        }
     };
 });
 

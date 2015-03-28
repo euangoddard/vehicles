@@ -12,6 +12,7 @@
   <!-- endinject -->
 </head>
 <body ng-app="vehicles" ng-controller="GameController as game_controller">
+  <name-capture ng-if="!game_controller.name"></name-capture>
   <vehicles
     ng-repeat="level in game_controller.levels"
     rows="level.rows"
@@ -19,28 +20,6 @@
     class="columns-{{ level.columns }} rows-{{ level.rows }} slide-in-out"
   >
   </vehicles>
-  <!--
-  <div ng-controller="NameController as name_controller" id="name-capture" class="container" ng-if="!game_controller.name">
-    <form name="capture" ng-submit="name_controller.read_name()">
-      <h1>Let's play</h1>
-      <input
-        type="text"
-        required
-        ng-model="name"
-        placeholder="what's your name"
-        ng-disabled="is_submitted"
-      >
-      <div>
-        <button
-          type="submit"
-          ng-disabled="capture.$invalid || is_submitted"
-        >
-            Play
-          </button>
-      </div>
-    </form>
-  </div>
--->
 
   <!-- inject:js -->
   <!-- endinject -->
