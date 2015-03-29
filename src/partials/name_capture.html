@@ -1,4 +1,4 @@
-<div id="name-capture" class="container">
+<div class="container">
 	<form name="capture" ng-submit="name_controller.read_name()">
 	  <h1>Let's play</h1>
 	  <input
@@ -8,13 +8,13 @@
 	    placeholder="what's your name"
 	    ng-disabled="is_submitted"
 	  >
-	  <div>
+	  <footer>
 	    <button
 	      type="submit"
 	      ng-disabled="capture.$invalid || is_submitted"
 	    >
 	        Play
 	      </button>
-	  </div>
+	  </footer>
 	</form>
 </div>

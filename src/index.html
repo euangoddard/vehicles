@@ -12,7 +12,7 @@
   <!-- endinject -->
 </head>
 <body ng-app="vehicles" ng-controller="GameController as game_controller">
-  <name-capture ng-if="!game_controller.name"></name-capture>
+  <name-capture class="dialog" ng-if="!game_controller.name"></name-capture>
   <vehicles
     ng-repeat="level in game_controller.levels"
     rows="level.rows"
@@ -20,6 +20,7 @@
     class="columns-{{ level.columns }} rows-{{ level.rows }} slide-in-out"
   >
   </vehicles>
+  <end-game class="dialog" ng-if="game_controller.is_complete"></end-game>
 
   <!-- inject:js -->
   <!-- endinject -->

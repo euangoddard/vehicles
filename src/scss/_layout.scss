@@ -9,6 +9,7 @@
 
 .container {
     height: 100vh;
+    user-select: none;
 }
 
 .list {
@@ -28,7 +29,6 @@
 }
 
 $max-slots: 3;
-
 @for $i from 1 through $max-slots {
     .rows-#{$i} {
         .list, .item {

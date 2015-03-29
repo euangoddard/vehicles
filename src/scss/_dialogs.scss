@@ -9,19 +9,23 @@ $lightPrimaryColor: #DCEDC8;
 $accentColor: #9E9E9E;
 $secondaryTextColor: #727272;
 
-#name-capture {
+.dialog {
     @include full-screen;
     background-color: $primaryColor;
     color: #fff;
     font-size: 2rem;
 
-    form {
+    form, article {
         width: 80%;
     }
 
-    h1 {
+    h1, p {
         font-weight: normal;
         text-align: center;
+    }
+
+    p {
+        font-size: 1.25rem;
     }
 
     input[type="text"] {
@@ -50,7 +54,7 @@ $secondaryTextColor: #727272;
         }
     }
 
-    div {
+    footer {
         display: flex;
         justify-content: flex-end;
 
@@ -88,7 +92,8 @@ $secondaryTextColor: #727272;
 }
 
 @include media-min-width-query(769px) {
-    #name-capture form {
+    .dialog form,
+    .dialog article {
         width: 50%;
     }
 }

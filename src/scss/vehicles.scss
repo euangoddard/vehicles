@@ -3,7 +3,7 @@
 @import "layout";
 @import "colours";
 @import "utils";
-@import "name-capture";
+@import "dialogs";
 
 
 .slide-in-out {
@@ -37,6 +37,14 @@
 
     &:hover {
         animation: wobble 0.7s ease;
+    }
+
+    &.selected {
+        opacity: 0.5;
+
+        &:hover {
+            animation: none;
+        }
     }
 }
 

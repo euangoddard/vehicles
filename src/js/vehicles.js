@@ -4,13 +4,11 @@ var vehicles = angular.module(
 );
 vehicles.run(function (Speech) {
     Speech.language = 'en-GB';
+    Speech.say('');
 });
 
 vehicles.controller('GameController', function ($scope, Speech, $interval) {
     var controller = this;
-    Speech.say('Welcome to vehicle hunt');
-
-    controller.name = null;
 
     controller.set_name = function (name) {
         controller.name = name;
@@ -19,7 +17,7 @@ vehicles.controller('GameController', function ($scope, Speech, $interval) {
         });
     };
 
-    var levels = get_levels();
+    var levels = []
     controller.levels = [];
     controller.advance_level = function () {
         controller.levels.shift();
@@ -27,9 +25,16 @@ vehicles.controller('GameController', function ($scope, Speech, $interval) {
         if (next_level) {
             controller.levels.push(next_level);
         } else {
-            alert('done');
+            controller.is_complete = true;
         }
     };
+
+    controller.restart = function () {
+        controller.name = null;
+        controller.is_complete = false;
+        levels = get_levels();
+    };
+    controller.restart();
 });
 
 
