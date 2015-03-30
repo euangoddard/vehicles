@@ -33,7 +33,7 @@ directives.directive('vehicles', function () {
     var QUESTION_TEMPLATES = _.map(QUESTION_TEMPLATE_STRINGS, _.template);
 
     return {
-        templateUrl: '../partials/vehicles.html',
+        templateUrl: '/partials/vehicles.html',
         controller: function ($scope, $attrs, VEHICLES, Speech) {
             var controller = this;
 
@@ -94,7 +94,7 @@ directives.directive('vehicles', function () {
 
 directives.directive('nameCapture', function () {
     return {
-        templateUrl: '../partials/name_capture.html',
+        templateUrl: '/partials/name_capture.html',
         controller: function ($scope) {
             $scope.name = null;
             $scope.is_submitted = false;
@@ -111,6 +111,6 @@ directives.directive('nameCapture', function () {
 
 directives.directive('endGame', function () {
     return {
-        templateUrl: '../partials/end.html'
+        templateUrl: '/partials/end.html'
     };
 });

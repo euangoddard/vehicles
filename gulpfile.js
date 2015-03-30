@@ -59,7 +59,7 @@ gulp.task('sass', ['constants'], function () {
     .pipe(sass({
       outputStyle: output_style,
       includePaths: [get_tmp_dir()],
-      imagePath: '../img'
+      imagePath: '/img'
     }))
     .pipe(autoprefixer({browsers: [
     	'last 2 versions'
@@ -101,7 +101,7 @@ gulp.task('build-html', ['build-js', 'copy-js-libs', 'copy-partials', 'sass'], f
     './dist/css/**/*.css'
   ], {read: false});
 
-  return target.pipe(inject(sources, {ignorePath: '/dist/', addRootSlash: false}))
+  return target.pipe(inject(sources, {ignorePath: '/dist/'}))
     .pipe(gulp.dest('./dist'));
 });
 
