@@ -33,6 +33,8 @@ directives.directive('vehicles', function () {
 
     var QUESTION_TEMPLATES = _.map(QUESTION_TEMPLATE_STRINGS, _.template);
 
+    var WRONG_ANSWER_TEMPLATE = _.template('Try again. Where\'s the ${vehicle}?');
+
     return {
         templateUrl: '/partials/vehicles.html',
         controller: function ($scope, $attrs, VEHICLES, Speech) {
@@ -83,7 +85,9 @@ directives.directive('vehicles', function () {
                     });
                 } else {
                     vehicle.is_selected = true;
-                    Speech.say('Try again');
+                    Speech.say(WRONG_ANSWER_TEMPLATE({
+                        vehicle: controller.selected_vehicle.name
+                    }));
                 }
             };
 
