@@ -3,7 +3,7 @@
         <div class="item" ng-repeat="vehicle in list">
             <div
             	class="vehicle vehicle-{{ ::vehicle.name }}"
-            	ng-class="{selected: vehicle.is_selected}"
+            	ng-class="{selected: vehicle.is_selected, winner: vehicle.is_winner}"
             	ng-click="vehicles_controller.guess(vehicle)"
         	></div>
         </div>
