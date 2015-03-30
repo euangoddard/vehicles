@@ -21,7 +21,8 @@ directives.directive('vehicles', function () {
         return {
             name: vehicle_name,
             id: _.uniqueId(),
-            is_selected: false
+            is_selected: false,
+            is_winner: false
         };
     };
 
@@ -75,12 +76,13 @@ directives.directive('vehicles', function () {
                 if (vehicle.is_selected) {
                     return;
                 }
-                vehicle.is_selected = true;
                 if (vehicle.id === controller.selected_vehicle.id) {
+                    vehicle.is_winner = true;
                     Speech.say('That\s right!').then(function () {
                         $scope.game_controller.advance_level();
                     });
                 } else {
+                    vehicle.is_selected = true;
                     Speech.say('Try again');
                 }
             };

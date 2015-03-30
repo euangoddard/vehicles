@@ -46,6 +46,12 @@
             animation: none;
         }
     }
+
+    &.winner {
+        transition: all 0.8s ease;
+        opacity: 0;
+        transform: scale(4);
+    }
 }
 
 @each $image-name in $image-names {
