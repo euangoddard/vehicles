@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <title>Vehicles</title>
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/vehicles.css">
+  <!-- endinject -->
+</head>
+<body ng-app="vehicles" ng-controller="GameController as game_controller">
+  <name-capture class="dialog" ng-if="!game_controller.name"></name-capture>
+  <vehicles
+    ng-repeat="level in game_controller.levels"
+    rows="level.rows"
+    columns="level.columns"
+    class="columns-{{ level.columns }} rows-{{ level.rows }} slide-in-out"
+  >
+  </vehicles>
+  <end-game class="dialog" ng-if="game_controller.is_complete"></end-game>
+
+  <!-- inject:js -->
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/lib/angular-animate.min.js"></script>
+  <script src="js/lib/lodash.min.js"></script>
+  <script src="js/app.js"></script>
+  <!-- endinject -->
+</body>
+</html>

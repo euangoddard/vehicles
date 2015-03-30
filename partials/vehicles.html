@@ -1,0 +1,11 @@
+<div class="container theme-{{ ::vehicles_controller.theme }}">
+    <div class="list" ng-repeat="list in vehicles_controller.vehicles">
+        <div class="item" ng-repeat="vehicle in list">
+            <div
+            	class="vehicle vehicle-{{ ::vehicle.name }}"
+            	ng-class="{selected: vehicle.is_selected}"
+            	ng-click="vehicles_controller.guess(vehicle)"
+        	></div>
+        </div>
+    </div>
+</div>
