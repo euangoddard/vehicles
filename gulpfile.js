@@ -5,6 +5,7 @@ var path = require('path');
 
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
+var ghPages = require('gh-pages');
 var gulpif = require('gulp-if');
 var inject = require('gulp-inject');
 var insert = require('gulp-insert');
@@ -12,6 +13,7 @@ var ngAnnotate = require('gulp-ng-annotate');
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var webserver = require('gulp-webserver');
+var swPrecache = require('sw-precache');
 
 
 var CONFIG = {
@@ -113,6 +115,29 @@ gulp.task('serve', function () {
       port: 8000,
       directoryListing: false
     }));
+});
+
+
+gulp.task('generate-service-worker', ['build'], function (callback) {
+  var fs = require('fs');
+  var path = require('path');
+  var swPrecache = require('sw-precache');
+  var rootDir = 'dist';
+
+  swPrecache({
+    staticFileGlobs: [rootDir + '/**/*.{js,html,css,svg}'],
+    stripPrefix: rootDir
+  }, function(error, swFileContents) {
+    if (error) {
+      return callback(error);
+    }
+    fs.writeFile(path.join(rootDir, 'service-worker.js'), swFileContents, callback);
+  });
+});
+
+gulp.task('gh-pages', ['generate-service-worker', 'build'], function (callback) {
+  fs.writeFileSync(path.join(__dirname, 'dist', 'CNAME'), 'vehicles.euans.space');
+  ghPages.publish(path.join(__dirname, 'dist'), callback);
 });
 
 
