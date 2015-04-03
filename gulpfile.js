@@ -2,6 +2,7 @@ var fs = require('fs');
 var glob = require('glob').sync;
 var gulp = require('gulp');
 var path = require('path');
+var del = require('del');
 
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
@@ -23,6 +24,11 @@ var CONFIG = {
 	outro: '\n}(window.angular, window._));\n',
   is_release: false
 };
+
+
+gulp.task('clean', function() {
+  del.sync(['./dist']);
+});
 
 
 gulp.task('copy-js-libs', function () {
