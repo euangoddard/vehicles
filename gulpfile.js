@@ -6,6 +6,7 @@ var path = require('path');
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var del = require('del');
+var favicons = require('favicons');
 var ghPages = require('gh-pages');
 var gulpif = require('gulp-if');
 var inject = require('gulp-inject');
@@ -27,7 +28,7 @@ var CONFIG = {
 
 
 gulp.task('clean', function() {
-  del.sync(['./dist']);
+  del.sync(['./dist', './tmp']);
 });
 
 
@@ -40,6 +41,36 @@ gulp.task('copy-js-libs', function () {
 gulp.task('copy-images', function () {
   return gulp.src('./src/img/**/*.svg')
     .pipe(gulp.dest('./dist/img'));
+});
+
+
+gulp.task('favicons', ['build-html'], function (done) {
+  favicons({
+    files: {
+      src: 'src/img/logo.png',
+      dest: 'dist/img/favicons',
+      html: './dist/index.html'
+    },
+    icons: {
+      android: true,
+      apple: true,
+      appleStartup: false,
+      coast: false,
+      favicons: true,
+      firefox: false,
+      opengraph: true,
+      windows: false,
+      yandex: false
+    },
+    settings: {
+      background: '#8BC34A',
+      appName: 'Vehicles',
+      appDescription: 'Vehicle recognition game for kids',
+      developer: 'Euan Goddard',
+      index: 'index.html',
+      url: 'https://vehicles.euans.space'
+    }
+  });
 });
 
 
@@ -113,6 +144,7 @@ gulp.task('build-html', ['build-js', 'copy-js-libs', 'copy-partials', 'sass'], f
     .pipe(gulp.dest('./dist'));
 });
 
+
 gulp.task('serve', function () {
   return gulp.src('./dist')
     .pipe(webserver({
@@ -147,7 +179,7 @@ gulp.task('gh-pages', ['generate-service-worker', 'build'], function (callback) 
 });
 
 
-gulp.task('build', ['build-html', 'copy-images']);
+gulp.task('build', ['build-html', 'copy-images', 'favicons']);
 
 
 gulp.task('watch', ['build'], function () {
