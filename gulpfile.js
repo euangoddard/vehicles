@@ -2,19 +2,19 @@ var fs = require('fs');
 var glob = require('glob').sync;
 var gulp = require('gulp');
 var path = require('path');
-var del = require('del');
 
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
+var del = require('del');
 var ghPages = require('gh-pages');
 var gulpif = require('gulp-if');
 var inject = require('gulp-inject');
 var insert = require('gulp-insert');
 var ngAnnotate = require('gulp-ng-annotate');
 var sass = require('gulp-sass');
+var swPrecache = require('sw-precache');
 var uglify = require('gulp-uglify');
 var webserver = require('gulp-webserver');
-var swPrecache = require('sw-precache');
 
 
 var CONFIG = {
