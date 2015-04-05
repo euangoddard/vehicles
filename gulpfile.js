@@ -48,7 +48,7 @@ gulp.task('favicons', ['build-html'], function (done) {
   favicons({
     files: {
       src: 'src/img/logo.png',
-      dest: 'dist/img/favicons',
+      dest: 'dist',
       html: './dist/index.html'
     },
     icons: {
@@ -63,14 +63,14 @@ gulp.task('favicons', ['build-html'], function (done) {
       yandex: false
     },
     settings: {
-      background: '#8BC34A',
+      background: '#9E9E9E',
       appName: 'Vehicles',
       appDescription: 'Vehicle recognition game for kids',
       developer: 'Euan Goddard',
       index: 'index.html',
       url: 'https://vehicles.euans.space'
     }
-  });
+  }, done);
 });
 
 
@@ -173,13 +173,13 @@ gulp.task('generate-service-worker', ['build'], function (callback) {
   });
 });
 
-gulp.task('gh-pages', ['generate-service-worker', 'build'], function (callback) {
+gulp.task('gh-pages', ['generate-service-worker', 'build', 'favicons'], function (callback) {
   fs.writeFileSync(path.join(__dirname, 'dist', 'CNAME'), 'vehicles.euans.space');
   ghPages.publish(path.join(__dirname, 'dist'), callback);
 });
 
 
-gulp.task('build', ['build-html', 'copy-images', 'favicons']);
+gulp.task('build', ['build-html', 'copy-images']);
 
 
 gulp.task('watch', ['build'], function () {
