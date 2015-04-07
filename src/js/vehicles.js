@@ -42,10 +42,12 @@ vehicles.controller('GameController', function ($scope, Speech, $interval) {
 
 
 // Utilities
+var MAX_LEVELS = 4;
+
 var get_levels = function () {
     var levels = [];
-    _.range(1, 4).forEach(function (rows) {
-        _.range(1, 4).forEach(function (columns) {
+    _.range(1, MAX_LEVELS + 1).forEach(function (rows) {
+        _.range(1, MAX_LEVELS + 1).forEach(function (columns) {
             levels.push({rows: rows, columns: columns});
         });
     });
@@ -61,4 +63,4 @@ var multiply_values = function (obj) {
         return a * b;
     });
     return sum
-}
+};

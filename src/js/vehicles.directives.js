@@ -14,7 +14,10 @@ var THEME_COLOURS = [
     'grey'
 ];
 
-var directives = angular.module('vehicles.directives', ['vehicles.constants', 'speech']);
+var directives = angular.module(
+    'vehicles.directives',
+    ['vehicles.constants', 'speech', 'storage']
+);
 
 directives.directive('vehicles', function () {
     var build_vehicle = function (vehicle_name) {
@@ -101,11 +104,12 @@ directives.directive('vehicles', function () {
 directives.directive('nameCapture', function () {
     return {
         templateUrl: '/partials/name_capture.html',
-        controller: function ($scope) {
-            $scope.name = null;
+        controller: function ($scope, SessionStore) {
+            $scope.name = SessionStore.get('player.name') || null;
             $scope.is_submitted = false;
 
             this.read_name = function () {
+                SessionStore.put('player.name', $scope.name);
                 $scope.game_controller.set_name($scope.name);
                 $scope.is_submitted = true;
             };
