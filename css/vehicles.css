@@ -94,6 +94,9 @@
 .theme-light-blue {
   background-color: #03A9F4; }
 
+.theme-cyan {
+  background-color: #00BCD4; }
+
 .theme-teal {
   background-color: #009688; }
 
@@ -102,6 +105,15 @@
 
 .theme-light-green {
   background-color: #8BC34A; }
+
+.theme-lime {
+  background-color: #CDDC39; }
+
+.theme-yellow {
+  background-color: #FFEB3B; }
+
+.theme-amber {
+  background-color: #FFC107; }
 
 .theme-orange {
   background-color: #FF9800; }
@@ -113,7 +125,7 @@
   background-color: #5D4037; }
 
 .theme-grey {
-  background-color: 616161; }
+  background-color: #616161; }
 
 input, button {
   font-family: 'Roboto', sans-serif; }
