@@ -10,7 +10,7 @@ vehicles.run(function (Speech) {
     Speech.say('');
 });
 
-vehicles.controller('GameController', function ($scope, Speech, $interval) {
+vehicles.controller('GameController', function ($scope, Speech, $interval, VEHICLES) {
     var controller = this;
 
     controller.set_name = function (name) {
@@ -35,20 +35,25 @@ vehicles.controller('GameController', function ($scope, Speech, $interval) {
     controller.restart = function () {
         controller.name = null;
         controller.is_complete = false;
-        levels = get_levels();
+        levels = get_levels(VEHICLES);
     };
     controller.restart();
 });
 
 
 // Utilities
-var MAX_LEVELS = 4;
+var MAX_LEVELS = 3;
 
-var get_levels = function () {
+var get_levels = function (vehicles) {
     var levels = [];
+    var candidate_vehicles = _.shuffle(vehicles);
     _.range(1, MAX_LEVELS + 1).forEach(function (rows) {
         _.range(1, MAX_LEVELS + 1).forEach(function (columns) {
-            levels.push({rows: rows, columns: columns});
+            levels.push({
+                rows: rows,
+                columns: columns,
+                vehicle: candidate_vehicles.pop()
+            });
         });
     });
     levels.sort(function (a, b) {
@@ -58,9 +63,9 @@ var get_levels = function () {
 };
 
 var multiply_values = function (obj) {
-    var values = _.values(obj);
+    var values = _.filter(_.values(obj), _.isFinite);
     var sum = _.reduce(values, function (a, b) {
         return a * b;
     });
-    return sum
+    return sum;
 };

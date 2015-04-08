@@ -44,19 +44,17 @@ directives.directive('vehicles', function () {
             var controller = this;
 
             controller.init = function () {
+
                 controller.theme = _.sample(THEME_COLOURS);
 
                 controller.rows = $scope.$eval($attrs.rows);
                 controller.columns = $scope.$eval($attrs.columns);
 
-                var selected_vehicle_name = _.sample(VEHICLES);
+                var selected_vehicle_name = $scope.$eval($attrs.selectedVehicle);
                 var other_vehicle_names = _.difference(VEHICLES, [selected_vehicle_name]);
 
-                var vehicle_names_pool = [];
-                var required_vehicle_count = controller.rows * controller.columns;
-                for (var i = required_vehicle_count - 1; i > 0; i--) {
-                    vehicle_names_pool.push(_.sample(other_vehicle_names));
-                };
+                var required_vehicle_count = (controller.rows * controller.columns) - 1;
+                var vehicle_names_pool = _.sample(other_vehicle_names, required_vehicle_count);
                 var vehicles_pool = _.map(vehicle_names_pool, build_vehicle);
 
                 controller.selected_vehicle = build_vehicle(selected_vehicle_name);
@@ -66,6 +64,7 @@ directives.directive('vehicles', function () {
 
                 controller.vehicles = _.chunk(vehicles_pool, controller.columns);
 
+                controller.is_winner_guessed = false;
                 controller.speak_clue();
             };
 
@@ -78,11 +77,12 @@ directives.directive('vehicles', function () {
             };
 
             controller.guess = function (vehicle) {
-                if (vehicle.is_selected) {
+                if (vehicle.is_selected || controller.is_winner_guessed) {
                     return;
                 }
                 if (vehicle.id === controller.selected_vehicle.id) {
                     vehicle.is_winner = true;
+                    controller.is_winner_guessed = true;
                     Speech.say('That\s right!').then(function () {
                         $scope.game_controller.advance_level();
                     });
