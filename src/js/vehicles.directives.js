@@ -5,13 +5,15 @@ var THEME_COLOURS = [
     'purple',
     'blue',
     'light-blue',
+    'cyan',
     'teal',
     'green',
-    'light-green',
+    'lime',
+    'yellow',
+    'amber',
     'orange',
     'deep-orange',
-    'brown',
-    'grey'
+    'brown'
 ];
 
 var directives = angular.module(
