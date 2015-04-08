@@ -1,13 +1,16 @@
+// Regular NPM dependencies
+var argv = require('minimist')(process.argv.slice(2));
+var del = require('del');
 var fs = require('fs');
 var glob = require('glob').sync;
-var gulp = require('gulp');
 var path = require('path');
 
+// Gulp dependencies
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
-var del = require('del');
 var favicons = require('favicons');
 var ghPages = require('gh-pages');
+var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var inject = require('gulp-inject');
 var insert = require('gulp-insert');
@@ -23,7 +26,7 @@ var CONFIG = {
 		'(function (angular, _) {\n' +
 		'    "use strict";\n',
 	outro: '\n}(window.angular, window._));\n',
-  is_release: false
+  is_release: !!argv.release
 };
 
 
